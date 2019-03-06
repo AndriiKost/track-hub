@@ -1,0 +1,35 @@
+/* EDITABLE FORM */
+.editable-form {
+    padding: 0 2em 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+}
+.editable-form input, select, option {
+    font-size: 1.2em;
+    margin: .2em;
+    border: 1px solid rgb(36, 36, 36);
+    border-radius: 3px;
+}
+
+/* ICONS */
+.icons-container {
+    height: 4em;
+}
+.icon-save {
+    float: right;
+    padding: 1em;
+}
+.icon-save img {
+    height: 2em;
+}
+.icon-save, .icon-close:hover {
+    cursor: pointer;
+}
+.icon-close {
+    float: left;
+    padding: 1em;
+}
+.icon-close img {
+    height: 2em;
+}

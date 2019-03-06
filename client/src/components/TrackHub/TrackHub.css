@@ -1,0 +1,32 @@
+.application-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: rgb(36, 36, 36);
+}
+/* Add New button */
+.add-new {
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    float: left;
+    width: 15em;
+    text-align: center;
+    border-radius: 5px;
+    background: rgba(239, 209, 76, 0.397);
+    color: rgb(36, 36, 36);
+}
+.add-new p {
+    padding-top: .3em;
+}
+.add-new:hover {
+    background: rgb(239, 209, 76);
+    cursor: pointer;
+    color: #000;
+}
+.add-icon {
+    height: 2em;
+}
+.add-icon-container {
+    float: left;
+    margin: 1em .5em 1em 1em;
+}

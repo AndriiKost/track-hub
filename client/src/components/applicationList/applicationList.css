@@ -1,0 +1,66 @@
+.application-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr .3fr;
+    border-bottom: 1px solid rgb(36, 36, 36);
+    justify-items: center;
+}
+.application-block > div:hover{
+    background: rgb(239, 209, 76);
+    cursor: pointer;
+    color: #000;
+    border-radius: 5px;
+}
+.application-block p {
+    padding: 1em 2em;
+    margin: 0;
+}
+.edit-icon {
+    padding: .75em;
+    height: 1.5em;
+}
+
+/* EDITABLE AREA */
+.editableArea-container {
+    /*  */
+    background: rgba(238, 238, 238, 0.85);
+    /*  */
+    border-bottom: 1px solid rgb(36, 36, 36);
+    position: absolute;
+    top: 0;
+    right:0;
+    bottom:0;
+    left:0;
+    z-index: 2;
+}
+
+.editable-content {
+    width: 75%;
+    margin: 5em auto;
+    background: #fff;
+    border: 2px solid rgb(36, 36, 36);
+    border-radius: 2px;
+}
+.icon-update {
+    float: right;
+    padding: 1em;
+}
+.icon-update img {
+    height: 2em;
+}
+.icon-update:hover {
+    cursor: pointer;
+}
+
+/* EDITABLE FORM */
+.editable-form {
+    padding: 2em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+}
+.editable-form input, select, option {
+    font-size: 1.2em;
+    margin: .2em;
+    border: 1px solid rgb(36, 36, 36);
+    border-radius: 3px;
+}
