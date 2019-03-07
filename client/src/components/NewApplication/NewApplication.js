@@ -15,11 +15,12 @@ class NewApplication extends Component {
         super(props)
         this.state = {
             newApplication: {
+                userID: '',
                 companyName: '',
                 dateApplied: '',
                 lastUpdate: '',
-                currentApplicationStatus: 'Applied'
-            }
+                currentApplicationStatus: 'Applied',
+            },
         }
     }
 
@@ -44,11 +45,9 @@ class NewApplication extends Component {
     }
 
     save() {
-        console.log(this.state.newApplication)
-        const id = uuidv1()
-        const newApplication = Object.assign({}, this.state.newApplication, {applicationID: id})
+        const newApplication = Object.assign({}, this.state.newApplication, {userID: this.props.auth.user.id});
         this.props.addApplication(newApplication);
-        this.props.history.push('/track-hub')
+        this.props.history.push('/track-hub');
     }
 
     close() {
@@ -57,7 +56,7 @@ class NewApplication extends Component {
 
     render() {
         const selectStatusArea = (
-            <select name="applicationStatus" onChange={(event) => this.handleNewApplication(event, 'currentApplicationStatus')}>
+            <select className="applicationStatus" name="applicationStatus" onChange={(event) => this.handleNewApplication(event, 'currentApplicationStatus')}>
                 <option value="Applied">Applied</option>
                 <option value="Under Review">Under Review</option>
                 <option value="Interview">Interview</option>
@@ -106,4 +105,10 @@ function mapDispatchToProps(dispatch) {
     };
   }
 
-export default connect(null, mapDispatchToProps)(NewApplication);
+  const mapStateToProps = state => {
+    return { 
+        auth: state.auth
+     };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewApplication);

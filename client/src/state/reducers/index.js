@@ -6,5 +6,5 @@ import applicationReducer from './applicationReducers';
 export default combineReducers({
   auth: authReducer,
   errors: errorReducer,
-  // application: applicationReducer
+  application: applicationReducer
 });

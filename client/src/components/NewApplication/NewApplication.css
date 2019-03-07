@@ -1,10 +1,4 @@
 /* EDITABLE FORM */
-.editable-form {
-    padding: 0 2em 2em;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 1em;
-}
 .editable-form input, select, option {
     font-size: 1.2em;
     margin: .2em;

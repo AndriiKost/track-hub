@@ -1,4 +1,4 @@
-import { ADD_APPLICATION, DATA_LOADED, DELETE_APPLICATION } from '../actions/types';
+import { ADD_APPLICATION, DATA_LOADED, DELETE_APPLICATION, SET_CURRENT_APPLICATIONS } from '../actions/types';
 
 const initialState = {
     applications: []
@@ -15,9 +15,20 @@ const initialState = {
                 applications: state.applications.concat(action.payload)
             })
         case DELETE_APPLICATION:
-        return Object.assign({}, state, {
-            applications: [...state.applications.filter(item => item._id !== action.payload.id )],
-          });
+            return {
+                ...state,
+                applications: state.applications.filter(item => {
+                    console.log(item)
+                    return item._id !== action.payload
+                })
+            };
+        // case DELETE_APPLICATION:
+        // console.log(state)
+        // return Object.assign({}, state, {
+        //     applications: [...state.applications.filter(item => {
+        //         console.log(`item => ${item}`)
+        //         return item._id !== action.payload.id })],
+        //   });
     }
     return state;
   };

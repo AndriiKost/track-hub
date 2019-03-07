@@ -3,9 +3,11 @@ import axios from 'axios'
 
 export function addApplication(payload) {
   return function(dispatch) {
-    axios.post('http://localhost:5000/api/applications/new', payload)
+    axios.post(`http://localhost:5000/api/applications/new`, payload)
           .then(function (response) {
-            return dispatch({ type: ADD_APPLICATION, payload: response.data })
+            if (response.data.message === "success") {
+              return dispatch({ type: ADD_APPLICATION, payload: response.data.applications })
+            }
           })
           .catch(function (error) {
             console.log(error);
@@ -13,11 +15,11 @@ export function addApplication(payload) {
   }
 };
 
-export function getAllApplications() {
+export function getAllApplications(userID) {
   return function(dispatch) {
-    return axios.get('http://localhost:5000/api/applications/all')
+    return axios.get(`http://localhost:5000/api/applications/all/${userID}`)
           .then(function (response) {
-            return dispatch({ type: DATA_LOADED, payload: response.data })
+            return dispatch({ type: DATA_LOADED, payload: response.data.applications })
           })
           .catch(function (error) {
             console.log(error);
@@ -25,25 +27,18 @@ export function getAllApplications() {
   }
 };
 
-export function deleteApplication(id) {
+export function deleteApplication(idsToDelete) {
+  const applicationID = idsToDelete.applicationID
+  const userID = idsToDelete.userID
   return function(dispatch) {
-    return axios.delete(`http://localhost:5000/api/applications/single/${id}`)
+    axios.delete(`http://localhost:5000/api/applications/delete/${userID}/${applicationID}`)
             .then(function (response) {
-              return dispatch({ type: DELETE_APPLICATION, payload: response.data })
+              if (response.data.message === "success") {
+                return dispatch({ type: DELETE_APPLICATION, payload: response.data.removedID })
+              }
             })
             .catch(function (error) {
               console.log(error)
             })
   }
 }
-
-
-// export function getAllApplications() {
-//   return function(dispatch) {
-//     return fetch(`http://localhost:8000/applications`)
-//             .then(response => response.json())
-//             .then(json => {
-//               dispatch({ type: DATA_LOADED, payload: json })
-//     })
-//   }
-// }

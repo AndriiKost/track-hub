@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { deleteApplication } from '../../state/actions/applicationActions'
+import React, { Component } from 'react';
+import { deleteApplication } from '../../state/actions/applicationActions';
 import { connect } from "react-redux";
 
 // styles
@@ -24,6 +24,14 @@ class ApplicationList extends Component {
     componentDidMount() {
         this.setState({ currentApplication: this.props.application })
     }
+
+    // componentWillReceiveProps(nextProps) {
+    //     console.log(nextProps.applications)
+    //     // if (this.state.applications !== [] && nextProps.applications.length !== this.state.applications.length) {
+    //     //     this.setState({applications: nextProps.applications, loading: false})
+    //     //     console.log(`update`)
+    //     // }
+    // }
 
     handleApplicationClick(action) {
         switch (action) {
@@ -56,9 +64,13 @@ class ApplicationList extends Component {
             case 'remove':
                 this.setState({ removeInput: newValue })
                 if (newValue === this.state.currentApplication.companyName) {
-                    const id = this.state.currentApplication._id;
-                    // console.log(id)
-                    this.props.deleteApplication(id)
+                    const applicationID = this.state.currentApplication._id;
+                    const userID = this.props.userID;
+                    const idsToDelete = {
+                        applicationID: applicationID,
+                        userID: userID
+                    }
+                    this.props.deleteApplication(idsToDelete)
                     this.setState({ currentApplication: {}, editable: false, removeInput: '' })
                 }
                 break;
@@ -71,7 +83,7 @@ class ApplicationList extends Component {
 
     render() {
         const selectStatusArea = (
-            <select name="applicationStatus" onChange={(event) => this.handleApplicationEdit(event, 'currentApplicationStatus')} value={this.state.currentApplication.currentApplicationStatus}>
+            <select className="applicationStatus" name="applicationStatus" onChange={(event) => this.handleApplicationEdit(event, 'currentApplicationStatus')} value={this.state.currentApplication.currentApplicationStatus}>
                 <option value="Applied">Applied</option>
                 <option value="Under Review">Under Review</option>
                 <option value="Interview">Interview</option>
@@ -86,40 +98,40 @@ class ApplicationList extends Component {
                 <div className="editable-content">
                     <div className="icon-update" onClick={() => this.handleApplicationClick('update')}><img src={updateIcon} title="sync changes" alt="sync changes"/></div>
                     <div className="editable-form">
-                    <p>Company Name: </p><input type="text" onChange={(event) => this.handleApplicationEdit(event, 'companyName')} value={this.state.currentApplication.companyName} />
-                    <p>Date Appied: </p><input type="text" onChange={(event) => this.handleApplicationEdit(event, 'dateApplied')} value={this.state.currentApplication.dateApplied} />
-                    <p>Current Application Status: </p> {selectStatusArea}
-                    <p>Last Update: </p><input type="text" onChange={(event) => this.handleApplicationEdit(event, 'lastUpdate')} value={this.state.currentApplication.lastUpdate} />
-                    <p>Remove: </p><input type="text" onChange={(event) => this.handleApplicationEdit(event, 'remove')} value={this.state.removeInput}/>
+                        <p>Company Name: </p><input type="text" onChange={(event) => this.handleApplicationEdit(event, 'companyName')} value={this.state.currentApplication.companyName} />
+                        <p>Date Appied: </p><input type="text" onChange={(event) => this.handleApplicationEdit(event, 'dateApplied')} value={this.state.currentApplication.dateApplied} />
+                        <p>Current Application Status: </p> {selectStatusArea}
+                        <p>Last Update: </p><input type="text" onChange={(event) => this.handleApplicationEdit(event, 'lastUpdate')} value={this.state.currentApplication.lastUpdate} />
+                        <p>Remove: </p><input type="text" onChange={(event) => this.handleApplicationEdit(event, 'remove')} value={this.state.removeInput}/>
                     </div>
-                    <span>* to remove the application please type the companie's name (case sensitive)</span>
+                    <span className="hint">* to remove the application please type the companie's name (case sensitive)</span>
                 </div>
             </div>
         )
 
         const mainContent = (
-            <div className="application-block">
-                <div onClick={() => this.handleApplicationClick('companyName')}>
-                    <p>{this.state.currentApplication.companyName}</p>
+                <div className="application-block">
+                    <div onClick={() => this.handleApplicationClick('companyName')}>
+                        <p>{this.state.currentApplication.companyName}</p>
+                    </div>
+                    <div onClick={() => this.handleApplicationClick('dateApplied')}>
+                        <p>{this.state.currentApplication.dateApplied}</p>
+                    </div>
+                    <div onClick={() => this.handleApplicationClick('currentApplicationStatus')}>
+                        <p>{this.state.currentApplication.currentApplicationStatus}</p>
+                    </div>
+                    <div onClick={() => this.handleApplicationClick('lastUpdate')}>
+                        <p>{this.state.currentApplication.lastUpdate}</p>
+                    </div>
+                    <div onClick={() => this.handleApplicationClick('editable')}>
+                        <img className="edit-icon" src={editIcon} />
+                    </div>
                 </div>
-                <div onClick={() => this.handleApplicationClick('dateApplied')}>
-                    <p>{this.state.currentApplication.dateApplied}</p>
-                </div>
-                <div onClick={() => this.handleApplicationClick('currentApplicationStatus')}>
-                    <p>{this.state.currentApplication.currentApplicationStatus}</p>
-                </div>
-                <div onClick={() => this.handleApplicationClick('lastUpdate')}>
-                    <p>{this.state.currentApplication.lastUpdate}</p>
-                </div>
-                <div onClick={() => this.handleApplicationClick('editable')}>
-                    <img className="edit-icon" src={editIcon} />
-                </div>
-            </div>
-        )
+                )
 
         return (
             <div>
-                {this.state.editable ? editableArea : mainContent}
+                {this.state.editable ? editableArea : this.state.currentApplication.companyName ? mainContent : null}
             </div>
         )
     }

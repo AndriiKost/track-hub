@@ -9,12 +9,12 @@ class Landing extends Component {
         <div className="row">
           <div className="col s12 center-align">
             <h4>
-              <b>Tracking</b> of your submited job applications{" "}
+              <b>Tracking</b> of your submitted job applications{" "}
               <span style={{ fontFamily: "monospace" }}>CAN</span> be easy
               with TrackHub
             </h4>
             <p className="flow-text grey-text text-darken-1">
-              Be confident and rock like a hurracane on the interview,<br />
+              Be confident and rock like a hurricane on the interview,<br />
               While we will take care of everything else.<br /> 
               For <span style={{ fontFamily: "monospace" }}>FREE</span>
             </p>

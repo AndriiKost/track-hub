@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
 import { getAllApplications } from '../../state/actions/applicationActions'
-import Loader from 'react-loader-spinner'
 // 
 import ApplicationList from '../applicationList/applicationList';
 import ListHead from '../ListHead/ListHead';
@@ -21,22 +20,21 @@ class TrackHub extends Component {
     }
 
     componentDidMount() {
-        // this.props.getAllApplications().then(data => {
-        //     this.setState({applications: data.payload, loading: false})
-        // })
-        this.props.getAllApplications().then(data => {
-            console.log(data)
+        const userID = this.props.auth.user.id
+        this.props.getAllApplications(userID).then(data => {
+            if (data.payload){
+                data.payload.map(el => {
+                    if (el._id && el.companyName && el.currentApplicationStatus && el.dateApplied && el.lastUpdate) {
+                        const joined = this.state.applications.concat(el);
+                        this.setState({ applications: joined })
+                    }
+                })
+                this.setState({loading: false})
+            } 
         })
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (this.state.applications !== [] && nextProps.applications.length !== this.state.applications.length) {
-            this.setState({applications: nextProps.applications, loading: false})
-        }
-    }
+      }
 
     render() {
-
         const addNewButton = (
             <div className="add-new">
                 <div className="add-icon-container">
@@ -50,32 +48,25 @@ class TrackHub extends Component {
             <ul className="application-list">
                 <li><ListHead /></li>
                 {this.state.applications.map(el => (
-                    <li key={el._id} ><ApplicationList application={el} /></li>
+                    <li key={el._id} ><ApplicationList userID={this.props.auth.user.id} application={el} /></li>
                 ))}
                     <li><Link to="/track-hub/new">{addNewButton}</Link></li>
             </ul>
         );
 
-        const loader = (
-            <Loader 
-                type="Puff"
-                color="rgb(36, 36, 36)"
-                height="100"	
-                width="100"
-            />   
-        )
-
         return (
             <div>
-                <h1>TrackHub</h1>
-                {this.state.loading ? loader : appList}
+                {this.state.loading ? <h3>loading ...</h3> : appList}
             </div>
         )
     }
 }
 
 const mapStateToProps = state => {
-    return { applications: state.applications };
+    return { 
+        applications: state.applications,
+        auth: state.auth
+     };
 };
 
 export default connect(mapStateToProps, {getAllApplications})(TrackHub);
