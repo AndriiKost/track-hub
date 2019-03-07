@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
-// import { getAllApplications } from '../../state/actions/index'
+import { getAllApplications } from '../../state/actions/applicationActions'
 import Loader from 'react-loader-spinner'
 // 
 import ApplicationList from '../applicationList/applicationList';
@@ -21,8 +21,11 @@ class TrackHub extends Component {
     }
 
     componentDidMount() {
+        // this.props.getAllApplications().then(data => {
+        //     this.setState({applications: data.payload, loading: false})
+        // })
         this.props.getAllApplications().then(data => {
-            this.setState({applications: data.payload, loading: false})
+            console.log(data)
         })
     }
 

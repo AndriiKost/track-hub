@@ -9,13 +9,14 @@ class Landing extends Component {
         <div className="row">
           <div className="col s12 center-align">
             <h4>
-              <b>Build</b> a login/auth app with the{" "}
-              <span style={{ fontFamily: "monospace" }}>MERN</span> stack from
-              scratch
+              <b>Tracking</b> of your submited job applications{" "}
+              <span style={{ fontFamily: "monospace" }}>CAN</span> be easy
+              with TrackHub
             </h4>
             <p className="flow-text grey-text text-darken-1">
-              Create a (minimal) full-stack app with user authentication via
-              passport and JWTs
+              Be confident and rock like a hurracane on the interview,<br />
+              While we will take care of everything else.<br /> 
+              For <span style={{ fontFamily: "monospace" }}>FREE</span>
             </p>
             <br />
             <div className="col s6">

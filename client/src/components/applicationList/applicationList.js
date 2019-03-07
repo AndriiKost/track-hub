@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import { deleteApplication } from '../../state/actions/index'
+import { deleteApplication } from '../../state/actions/applicationActions'
 import { connect } from "react-redux";
 
 // styles
@@ -58,7 +58,7 @@ class ApplicationList extends Component {
                 if (newValue === this.state.currentApplication.companyName) {
                     const id = this.state.currentApplication._id;
                     // console.log(id)
-                    // this.props.deleteApplication(id)
+                    this.props.deleteApplication(id)
                     this.setState({ currentApplication: {}, editable: false, removeInput: '' })
                 }
                 break;

@@ -13,6 +13,8 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import TrackHub from "./components/TrackHub/TrackHub";
+import NewApplication from "./components/NewApplication/NewApplication";
 
 // Styles
 import './App.css';
@@ -44,8 +46,8 @@ class App extends Component {
           <div className="App">
               <Navbar />
               <Route exact path="/" component={Landing} />
-              {/* <Route exact path="/track-hub" component={TrackHub} /> */}
-              {/* <Route exact path="/track-hub/new" component={NewApplication} /> */}
+              <Route exact path="/track-hub" component={TrackHub} />
+              <Route exact path="/track-hub/new" component={NewApplication} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Switch>

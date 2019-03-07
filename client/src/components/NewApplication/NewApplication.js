@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
-// import { addApplication } from '../../state/actions/index'
+import { addApplication } from '../../state/actions/applicationActions'
 import uuidv1 from 'uuid'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -47,7 +47,7 @@ class NewApplication extends Component {
         console.log(this.state.newApplication)
         const id = uuidv1()
         const newApplication = Object.assign({}, this.state.newApplication, {applicationID: id})
-        // this.props.addApplication(newApplication);
+        this.props.addApplication(newApplication);
         this.props.history.push('/track-hub')
     }
 
@@ -102,7 +102,7 @@ class NewApplication extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-    //   addApplication: application => dispatch(addApplication(application))
+      addApplication: application => dispatch(addApplication(application))
     };
   }
 

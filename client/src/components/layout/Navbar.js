@@ -8,14 +8,14 @@ class Navbar extends Component {
         <nav className="z-depth-0">
           <div className="nav-wrapper white">
             <Link
-              to="/"
+              to="/track-hub"
               style={{
                 fontFamily: "monospace"
               }}
               className="col s5 brand-logo center black-text"
             >
               <i className="material-icons">code</i>
-              MERN
+              Track Hub
             </Link>
           </div>
         </nav>
