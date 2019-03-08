@@ -1,4 +1,4 @@
-import { ADD_APPLICATION, DATA_LOADED, DELETE_APPLICATION } from './types'
+import { ADD_APPLICATION, DATA_LOADED, DELETE_APPLICATION, UPDATE_APPLICATION } from './types'
 import axios from 'axios'
 
 export function addApplication(payload) {
@@ -40,5 +40,24 @@ export function deleteApplication(idsToDelete) {
             .catch(function (error) {
               console.log(error)
             })
+  }
+}
+
+export function updateApplication(options) {
+  const applicationID = options.applicationID;
+  const userID = options.userID;
+  const newApplication = options.application
+
+  return function(dispatch) {
+    axios.put(`http://localhost:5000/api/applications/update/${userID}/${applicationID}`, newApplication)
+        .then((response) => {
+          console.log(response)
+          // if (response.data.message === "success") {
+          //   return dispatch({ type: DELETE_APPLICATION, payload: response.data.removedID })
+          // }
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
   }
 }

@@ -59,6 +59,21 @@ router.delete('/delete/:userID/:applicationID', async (req, res, next) => {
         return next(err)
     }
 })
+
+// Private update user's application by ids
+router.put('/update/:userID/:applicationID', async (req, res, next) => {
+    try {
+        const {userID, applicationID} = req.params
+        const newApplication = req.body
+        await User.updateOne( { "_id": userID }, { $pull: { applications: { _id: applicationID } } })
+        await User.updateOne({ "_id": userID }, { $push: { applications: newApplication } })
+    } catch(err) {
+        console.log(err)
+        res.status(500)
+        res.send(`Failed to delete application`)
+        return next(err)
+    }
+})
 // router.delete('/single/:id', async (req, res, next) => {
 //     try {
 //         const id = req.params.id

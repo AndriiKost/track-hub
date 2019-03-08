@@ -1,0 +1,12 @@
+.nav-wrapper {
+    border-bottom: 2px solid #000;
+}
+
+@media (max-width: 500px) {
+    nav .brand-logo {
+        font-size: 1.1rem;
+    }
+    nav ul a {
+        font-size: .8rem;
+    }
+}

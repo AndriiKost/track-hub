@@ -1,0 +1,20 @@
+{
+  "main.css": "/static/css/main.33d69eac.chunk.css",
+  "main.js": "/static/js/main.98b7ddbd.chunk.js",
+  "main.js.map": "/static/js/main.98b7ddbd.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.fdfcfda2.js",
+  "runtime~main.js.map": "/static/js/runtime~main.fdfcfda2.js.map",
+  "static/css/2.1e2eb08c.chunk.css": "/static/css/2.1e2eb08c.chunk.css",
+  "static/js/2.14e0cad0.chunk.js": "/static/js/2.14e0cad0.chunk.js",
+  "static/js/2.14e0cad0.chunk.js.map": "/static/js/2.14e0cad0.chunk.js.map",
+  "index.html": "/index.html",
+  "precache-manifest.a4c4d2865fe7cb77537e5a0df7027f02.js": "/precache-manifest.a4c4d2865fe7cb77537e5a0df7027f02.js",
+  "service-worker.js": "/service-worker.js",
+  "static/css/2.1e2eb08c.chunk.css.map": "/static/css/2.1e2eb08c.chunk.css.map",
+  "static/css/main.33d69eac.chunk.css.map": "/static/css/main.33d69eac.chunk.css.map",
+  "static/media/add-button.svg": "/static/media/add-button.8821e4bc.svg",
+  "static/media/edit.svg": "/static/media/edit.2927f8de.svg",
+  "static/media/error.svg": "/static/media/error.35a6ccb5.svg",
+  "static/media/paper-plane.svg": "/static/media/paper-plane.2c0cb899.svg",
+  "static/media/refresh.svg": "/static/media/refresh.cb499d5d.svg"
+}

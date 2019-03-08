@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { deleteApplication } from '../../state/actions/applicationActions';
+import { deleteApplication, updateApplication } from '../../state/actions/applicationActions';
 import { connect } from "react-redux";
 
 // styles
 import './applicationList.css';
 import editIcon from '../../assests/edit.svg'
 import updateIcon from '../../assests/refresh.svg'
-import closeIcon from '../../assests/error.svg';
+// import closeIcon from '../../assests/error.svg';
 
 class ApplicationList extends Component {
     constructor(props) {
@@ -25,14 +25,6 @@ class ApplicationList extends Component {
         this.setState({ currentApplication: this.props.application })
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     console.log(nextProps.applications)
-    //     // if (this.state.applications !== [] && nextProps.applications.length !== this.state.applications.length) {
-    //     //     this.setState({applications: nextProps.applications, loading: false})
-    //     //     console.log(`update`)
-    //     // }
-    // }
-
     handleApplicationClick(action) {
         switch (action) {
             case 'editable':
@@ -40,13 +32,21 @@ class ApplicationList extends Component {
                 break;
             case 'update':
                 this.setState({editable: false})
+                const applicationID = this.state.currentApplication._id;
+                const userID = this.props.userID;
+                
+                const options = {
+                    applicationID: applicationID,
+                    userID: userID,
+                    application: this.state.currentApplication
+                }
+                this.props.updateApplication(options)
                 break;
         }
     }
 
     handleApplicationEdit(event, action) {
         const newValue = event.target.value;
-        console.log(`REGISTERED CHANGE ON ${action} = ${newValue}`)
 
         switch (action) {
             case 'companyName':
@@ -98,10 +98,10 @@ class ApplicationList extends Component {
                 <div className="editable-content">
                     <div className="icon-update" onClick={() => this.handleApplicationClick('update')}><img src={updateIcon} title="sync changes" alt="sync changes"/></div>
                     <div className="editable-form">
-                        <p>Company Name: </p><input type="text" onChange={(event) => this.handleApplicationEdit(event, 'companyName')} value={this.state.currentApplication.companyName} />
-                        <p>Date Appied: </p><input type="text" onChange={(event) => this.handleApplicationEdit(event, 'dateApplied')} value={this.state.currentApplication.dateApplied} />
+                        <p>Company Name: </p><input type="text" placeholder="Google" onChange={(event) => this.handleApplicationEdit(event, 'companyName')} value={this.state.currentApplication.companyName} />
+                        <p>Date Appied: </p><input type="text" placeholder="Jan 11, 2019" onChange={(event) => this.handleApplicationEdit(event, 'dateApplied')} value={this.state.currentApplication.dateApplied} />
                         <p>Current Application Status: </p> {selectStatusArea}
-                        <p>Last Update: </p><input type="text" onChange={(event) => this.handleApplicationEdit(event, 'lastUpdate')} value={this.state.currentApplication.lastUpdate} />
+                        <p>Last Update: </p><input type="text" placeholder="Jan 15, 2019" onChange={(event) => this.handleApplicationEdit(event, 'lastUpdate')} value={this.state.currentApplication.lastUpdate} />
                         <p>Remove: </p><input type="text" onChange={(event) => this.handleApplicationEdit(event, 'remove')} value={this.state.removeInput}/>
                     </div>
                     <span className="hint">* to remove the application please type the companie's name (case sensitive)</span>
@@ -139,7 +139,8 @@ class ApplicationList extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-      deleteApplication: application => dispatch(deleteApplication(application))
+      deleteApplication: application => dispatch(deleteApplication(application)),
+      updateApplication: options => dispatch(updateApplication(options))
     };
   }
 

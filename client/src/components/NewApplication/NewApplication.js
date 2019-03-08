@@ -26,7 +26,6 @@ class NewApplication extends Component {
 
     handleNewApplication(event, action) {
         const newValue = event.target.value
-        console.log(`REGISTERED CHANGE ON ${action} = ${newValue}`)
 
         switch (action) {
             case 'companyName':
@@ -82,10 +81,10 @@ class NewApplication extends Component {
             <div className="editable-content">
                 {icons}
                 <div className="editable-form">
-                <p>Company Name: </p><input type="text" onChange={(event) => this.handleNewApplication(event, 'companyName')} value={this.state.newApplication.companyName} />
-                <p>Date Appied: </p><input type="text" onChange={(event) => this.handleNewApplication(event, 'dateApplied')} value={this.state.newApplication.dateApplied} />
+                <p>Company Name: </p><input type="text" placeholder="Google" onChange={(event) => this.handleNewApplication(event, 'companyName')} value={this.state.newApplication.companyName} />
+                <p>Date Appied: </p><input type="text" placeholder="Jan 11, 2019" onChange={(event) => this.handleNewApplication(event, 'dateApplied')} value={this.state.newApplication.dateApplied} />
                 <p>Current Application Status: </p> {selectStatusArea}
-                <p>Last Update: </p><input type="text" onChange={(event) => this.handleNewApplication(event, 'lastUpdate')} value={this.state.newApplication.lastUpdate} />
+                <p>Last Update: </p><input type="text" placeholder="Jan 15, 2019" onChange={(event) => this.handleNewApplication(event, 'lastUpdate')} value={this.state.newApplication.lastUpdate} />
                 </div>
             </div>
         </div>

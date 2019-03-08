@@ -55,7 +55,7 @@ class TrackHub extends Component {
         );
 
         return (
-            <div>
+            <div className="track-hub">
                 {this.state.loading ? <h3>loading ...</h3> : appList}
             </div>
         )

@@ -70,3 +70,21 @@
 .hint {
     text-align: center;
 }
+
+@media (max-width: 500px) {
+    .editable-content {
+        width: 90%;
+    }
+    .application-list {
+        font-size: .6em;
+    }
+    .editable-form {
+        grid-template-columns: 1fr;
+        grid-gap: .5em;
+        padding: 0;
+    }
+    .editable-form p {
+        margin: 0;
+        padding: 0;
+    }
+}
